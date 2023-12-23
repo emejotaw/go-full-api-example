@@ -74,9 +74,16 @@ func TestFindAll(t *testing.T) {
 		repository.Create(product)
 	}
 
-	products, err := repository.FindAll(0, 10, 1)
+	products, err := repository.FindAll(1, 2, "asc")
 	assert.Nil(t, err)
-	assert.Equal(t, len(products), len(tests))
+	assert.Equal(t, "Rice", products[0].Name)
+	assert.Equal(t, "Sugar", products[1].Name)
+
+	products, err = repository.FindAll(2, 2, "asc")
+	assert.Nil(t, err)
+	assert.Equal(t, "Bean", products[0].Name)
+	assert.Equal(t, "Potato", products[1].Name)
+
 }
 
 func TestFindByID(t *testing.T) {
@@ -130,6 +137,10 @@ func TestUpdate(t *testing.T) {
 	product.Price = 100
 
 	p2, err := entity.NewProduct("Some product", 46.65)
+
+	if err != nil {
+		t.Fatalf("could not generate the product, error: %v", err)
+	}
 
 	type testCase struct {
 		product       *entity.Product

@@ -1,7 +1,7 @@
 mode: set
 github.com/emejotaw/product-api/internal/infra/database/sqlite/sqlite_product_repository.go:12.59,16.2 1 1
 github.com/emejotaw/product-api/internal/infra/database/sqlite/sqlite_product_repository.go:18.67,20.2 1 1
-github.com/emejotaw/product-api/internal/infra/database/sqlite/sqlite_product_repository.go:22.86,29.2 3 1
+github.com/emejotaw/product-api/internal/infra/database/sqlite/sqlite_product_repository.go:22.93,29.2 3 1
 github.com/emejotaw/product-api/internal/infra/database/sqlite/sqlite_product_repository.go:31.74,36.2 3 1
 github.com/emejotaw/product-api/internal/infra/database/sqlite/sqlite_product_repository.go:38.67,42.16 2 1
 github.com/emejotaw/product-api/internal/infra/database/sqlite/sqlite_product_repository.go:42.16,44.3 1 1

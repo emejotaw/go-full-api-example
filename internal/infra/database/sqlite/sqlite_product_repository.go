@@ -19,11 +19,11 @@ func (p *ProductRepository) Create(product *entity.Product) error {
 	return p.db.Create(product).Error
 }
 
-func (p *ProductRepository) FindAll(page, limit, sort int) ([]entity.Product, error) {
+func (p *ProductRepository) FindAll(page, limit int, sort string) ([]entity.Product, error) {
 
 	products := []entity.Product{}
 
-	err := p.db.Offset(page).Limit(limit).Find(&products).Error
+	err := p.db.Offset((page - 1) * limit).Limit(limit).Find(&products).Error
 
 	return products, err
 }
