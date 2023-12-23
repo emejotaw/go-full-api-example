@@ -129,8 +129,6 @@ func TestUpdate(t *testing.T) {
 	product.Name = "TOMATO"
 	product.Price = 100
 
-	err = repository.Update(product)
-
 	p2, err := entity.NewProduct("Some product", 46.65)
 
 	type testCase struct {
