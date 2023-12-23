@@ -131,9 +131,23 @@ func TestUpdate(t *testing.T) {
 
 	err = repository.Update(product)
 
-	assert.Nil(t, err)
-	assert.Equal(t, "TOMATO", product.Name)
-	assert.Equal(t, float32(100), product.Price)
+	p2, err := entity.NewProduct("Some product", 46.65)
+
+	type testCase struct {
+		product       *entity.Product
+		expectedError error
+	}
+
+	tests := []testCase{
+		{product, nil},
+		{p2, errors.New("record not found")},
+	}
+
+	for _, test := range tests {
+
+		err = repository.Update(test.product)
+		assert.Equal(t, test.expectedError, err)
+	}
 }
 
 func TestDelete(t *testing.T) {

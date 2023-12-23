@@ -37,6 +37,12 @@ func (p *ProductRepository) FindByID(id string) (*entity.Product, error) {
 
 func (p *ProductRepository) Update(product *entity.Product) error {
 
+	_, err := p.FindByID(product.ID.String())
+
+	if err != nil {
+		return err
+	}
+
 	return p.db.Save(product).Error
 }
 

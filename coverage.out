@@ -3,10 +3,12 @@ github.com/emejotaw/product-api/internal/infra/database/sqlite/sqlite_product_re
 github.com/emejotaw/product-api/internal/infra/database/sqlite/sqlite_product_repository.go:18.67,20.2 1 1
 github.com/emejotaw/product-api/internal/infra/database/sqlite/sqlite_product_repository.go:22.86,29.2 3 1
 github.com/emejotaw/product-api/internal/infra/database/sqlite/sqlite_product_repository.go:31.74,36.2 3 1
-github.com/emejotaw/product-api/internal/infra/database/sqlite/sqlite_product_repository.go:38.67,41.2 1 1
-github.com/emejotaw/product-api/internal/infra/database/sqlite/sqlite_product_repository.go:43.53,47.16 2 1
-github.com/emejotaw/product-api/internal/infra/database/sqlite/sqlite_product_repository.go:47.16,49.3 1 1
-github.com/emejotaw/product-api/internal/infra/database/sqlite/sqlite_product_repository.go:51.2,51.35 1 1
+github.com/emejotaw/product-api/internal/infra/database/sqlite/sqlite_product_repository.go:38.67,42.16 2 1
+github.com/emejotaw/product-api/internal/infra/database/sqlite/sqlite_product_repository.go:42.16,44.3 1 1
+github.com/emejotaw/product-api/internal/infra/database/sqlite/sqlite_product_repository.go:46.2,46.33 1 1
+github.com/emejotaw/product-api/internal/infra/database/sqlite/sqlite_product_repository.go:49.53,53.16 2 1
+github.com/emejotaw/product-api/internal/infra/database/sqlite/sqlite_product_repository.go:53.16,55.3 1 1
+github.com/emejotaw/product-api/internal/infra/database/sqlite/sqlite_product_repository.go:57.2,57.35 1 1
 github.com/emejotaw/product-api/internal/infra/database/sqlite/sqlite_user_repository.go:12.33,16.2 1 1
 github.com/emejotaw/product-api/internal/infra/database/sqlite/sqlite_user_repository.go:18.48,21.2 1 1
 github.com/emejotaw/product-api/internal/infra/database/sqlite/sqlite_user_repository.go:23.64,28.2 3 1
