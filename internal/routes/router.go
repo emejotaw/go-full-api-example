@@ -22,12 +22,12 @@ func (r *router) Run(db *gorm.DB) {
 		return nil
 	})
 
+	ConfigureLoginRoutes(app)
 	app.Use(jwtware.New(jwtware.Config{
 		SigningKey: jwtware.SigningKey{Key: []byte("secret")},
 	}))
 
-	productRouter := NewProductRouter()
-	productRouter.Configure(app, db)
+	ConfigureProductRoutes(app, db)
 
 	app.Listen(":8000")
 }

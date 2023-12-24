@@ -6,14 +6,7 @@ import (
 	"gorm.io/gorm"
 )
 
-type productRouter struct {
-}
-
-func NewProductRouter() *productRouter {
-	return &productRouter{}
-}
-
-func (r *productRouter) Configure(server *fiber.App, db *gorm.DB) {
+func ConfigureProductRoutes(server *fiber.App, db *gorm.DB) {
 
 	productController := controller.NewProductController(db)
 
