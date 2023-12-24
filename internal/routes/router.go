@@ -1,7 +1,8 @@
 package routes
 
 import (
-	"github.com/gofiber/fiber"
+	jwtware "github.com/gofiber/contrib/jwt"
+	"github.com/gofiber/fiber/v2"
 	"gorm.io/gorm"
 )
 
@@ -14,10 +15,19 @@ func NewRouter() *router {
 
 func (r *router) Run(db *gorm.DB) {
 
+	app := fiber.New()
+	app.Get("/health", func(c *fiber.Ctx) error {
+
+		c.SendString("UP")
+		return nil
+	})
+
+	app.Use(jwtware.New(jwtware.Config{
+		SigningKey: jwtware.SigningKey{Key: []byte("secret")},
+	}))
+
 	productRouter := NewProductRouter()
-	server := fiber.New()
+	productRouter.Configure(app, db)
 
-	productRouter.Configure(server, db)
-
-	server.Listen(":8000")
+	app.Listen(":8000")
 }

@@ -6,7 +6,7 @@ import (
 
 	"github.com/emejotaw/product-api/internal/service"
 	"github.com/emejotaw/product-api/internal/types"
-	"github.com/gofiber/fiber"
+	"github.com/gofiber/fiber/v2"
 	"gorm.io/gorm"
 )
 
@@ -22,40 +22,41 @@ func NewProductController(db *gorm.DB) *ProductController {
 	}
 }
 
-func (pc *ProductController) CreateProduct(ctx *fiber.Ctx) {
+func (pc *ProductController) CreateProduct(ctx *fiber.Ctx) error {
 
 	productDTO := new(types.ProductDTO)
 	err := ctx.BodyParser(productDTO)
 
 	if err != nil {
 		ctx.Status(http.StatusBadRequest)
-		return
+		return err
 	}
 
 	err = pc.productService.Create(productDTO)
 
 	if err != nil {
 		ctx.Status(http.StatusInternalServerError)
-		return
+		return err
 	}
 
 	ctx.Status(http.StatusCreated)
+	return nil
 }
 
-func (pc *ProductController) FindAll(ctx *fiber.Ctx) {
+func (pc *ProductController) FindAll(ctx *fiber.Ctx) error {
 
 	page, errPage := strconv.Atoi(ctx.Query("page"))
 
 	if errPage != nil {
 		ctx.Status(http.StatusBadRequest)
-		return
+		return errPage
 	}
 
 	size, errSize := strconv.Atoi(ctx.Query("size"))
 
 	if errSize != nil {
 		ctx.Status(http.StatusBadRequest)
-		return
+		return errSize
 	}
 
 	sort := ctx.Query("sort")
@@ -64,13 +65,14 @@ func (pc *ProductController) FindAll(ctx *fiber.Ctx) {
 
 	if err != nil {
 		ctx.Status(http.StatusInternalServerError)
-		return
+		return err
 	}
 
 	ctx.JSON(products)
+	return nil
 }
 
-func (pc *ProductController) FindByID(ctx *fiber.Ctx) {
+func (pc *ProductController) FindByID(ctx *fiber.Ctx) error {
 
 	productId := ctx.Query("productId")
 
@@ -78,13 +80,14 @@ func (pc *ProductController) FindByID(ctx *fiber.Ctx) {
 
 	if err != nil {
 		ctx.Status(http.StatusInternalServerError)
-		return
+		return err
 	}
 
 	ctx.JSON(product)
+	return nil
 }
 
-func (pc *ProductController) Update(ctx *fiber.Ctx) {
+func (pc *ProductController) Update(ctx *fiber.Ctx) error {
 
 	productId := ctx.Query("productId")
 	productDTO := new(types.ProductDTO)
@@ -92,20 +95,21 @@ func (pc *ProductController) Update(ctx *fiber.Ctx) {
 
 	if err != nil {
 		ctx.Status(http.StatusBadRequest)
-		return
+		return err
 	}
 
 	err = pc.productService.Update(productId, productDTO)
 
 	if err != nil {
 		ctx.Status(http.StatusInternalServerError)
-		return
+		return err
 	}
 
 	ctx.Status(http.StatusNoContent)
+	return nil
 }
 
-func (pc *ProductController) Delete(ctx *fiber.Ctx) {
+func (pc *ProductController) Delete(ctx *fiber.Ctx) error {
 
 	productID := ctx.Query("productId")
 
@@ -113,8 +117,9 @@ func (pc *ProductController) Delete(ctx *fiber.Ctx) {
 
 	if err != nil {
 		ctx.Status(http.StatusInternalServerError)
-		return
+		return err
 	}
 
 	ctx.Status(http.StatusNoContent)
+	return nil
 }
