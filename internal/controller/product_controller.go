@@ -5,6 +5,7 @@ import (
 	"strconv"
 
 	"github.com/emejotaw/product-api/internal/service"
+	"github.com/emejotaw/product-api/internal/types"
 	"github.com/gofiber/fiber"
 	"gorm.io/gorm"
 )
@@ -23,6 +24,22 @@ func NewProductController(db *gorm.DB) *ProductController {
 
 func (pc *ProductController) CreateProduct(ctx *fiber.Ctx) {
 
+	productDTO := new(types.ProductDTO)
+	err := ctx.BodyParser(productDTO)
+
+	if err != nil {
+		ctx.Status(http.StatusBadRequest)
+		return
+	}
+
+	err = pc.productService.Create(productDTO)
+
+	if err != nil {
+		ctx.Status(http.StatusInternalServerError)
+		return
+	}
+
+	ctx.Status(http.StatusCreated)
 }
 
 func (pc *ProductController) FindAll(ctx *fiber.Ctx) {

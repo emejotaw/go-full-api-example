@@ -1,9 +1,12 @@
 package service
 
 import (
+	"log"
+
 	"github.com/emejotaw/product-api/internal/entity"
 	"github.com/emejotaw/product-api/internal/infra/database"
 	"github.com/emejotaw/product-api/internal/infra/database/sqlite"
+	"github.com/emejotaw/product-api/internal/types"
 	"gorm.io/gorm"
 )
 
@@ -19,7 +22,14 @@ func NewProductService(db *gorm.DB) *ProductService {
 	}
 }
 
-func (ps *ProductService) Create(product *entity.Product) error {
+func (ps *ProductService) Create(productDTO *types.ProductDTO) error {
+
+	product, err := entity.NewProduct(productDTO.Name, productDTO.Price)
+
+	if err != nil {
+		log.Printf("could not generate the product, error: %v", err)
+		return err
+	}
 
 	return ps.productRepository.Create(product)
 }
