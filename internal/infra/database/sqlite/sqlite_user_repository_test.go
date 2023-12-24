@@ -38,7 +38,7 @@ func TestCreate(t *testing.T) {
 		t.Fatal("could not map user")
 	}
 
-	repository := NewUser(db)
+	repository := NewUserRepository(db)
 	err = repository.Create(user)
 
 	assert.Nil(t, err)
@@ -52,7 +52,7 @@ func TestFindByEmail(t *testing.T) {
 		t.Fatal("could not establish database connection")
 	}
 
-	repository := NewUser(db)
+	repository := NewUserRepository(db)
 	user, err := repository.FindByEmail("jhondoe@gmail.com")
 
 	assert.Nil(t, err)

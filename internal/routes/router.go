@@ -22,7 +22,9 @@ func (r *router) Run(db *gorm.DB) {
 		return nil
 	})
 
-	ConfigureLoginRoutes(app)
+	ConfigureLoginRoutes(app, db)
+	ConfigureUserRoutes(app, db)
+
 	app.Use(jwtware.New(jwtware.Config{
 		SigningKey: jwtware.SigningKey{Key: []byte("secret")},
 	}))

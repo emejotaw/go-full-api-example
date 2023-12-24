@@ -5,15 +5,16 @@ import (
 
 	"github.com/emejotaw/product-api/internal/service"
 	"github.com/gofiber/fiber/v2"
+	"gorm.io/gorm"
 )
 
 type LoginController struct {
 	loginService *service.LoginService
 }
 
-func NewLoginController() *LoginController {
+func NewLoginController(db *gorm.DB) *LoginController {
 
-	loginService := service.NewLoginService()
+	loginService := service.NewLoginService(db)
 	return &LoginController{
 		loginService: loginService,
 	}
@@ -21,7 +22,7 @@ func NewLoginController() *LoginController {
 
 func (lc *LoginController) Login(c *fiber.Ctx) error {
 
-	username := c.FormValue("username")
+	username := c.FormValue("email")
 	password := c.FormValue("password")
 
 	tokenBytes, err := lc.loginService.Login(username, password)
