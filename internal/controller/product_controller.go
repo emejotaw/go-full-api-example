@@ -86,8 +86,35 @@ func (pc *ProductController) FindByID(ctx *fiber.Ctx) {
 
 func (pc *ProductController) Update(ctx *fiber.Ctx) {
 
+	productId := ctx.Query("productId")
+	productDTO := new(types.ProductDTO)
+	err := ctx.BodyParser(productDTO)
+
+	if err != nil {
+		ctx.Status(http.StatusBadRequest)
+		return
+	}
+
+	err = pc.productService.Update(productId, productDTO)
+
+	if err != nil {
+		ctx.Status(http.StatusInternalServerError)
+		return
+	}
+
+	ctx.Status(http.StatusNoContent)
 }
 
 func (pc *ProductController) Delete(ctx *fiber.Ctx) {
 
+	productID := ctx.Query("productId")
+
+	err := pc.productService.Delete(productID)
+
+	if err != nil {
+		ctx.Status(http.StatusInternalServerError)
+		return
+	}
+
+	ctx.Status(http.StatusNoContent)
 }

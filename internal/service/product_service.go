@@ -43,7 +43,17 @@ func (ps *ProductService) FindByID(productId string) (*entity.Product, error) {
 	return ps.productRepository.FindByID(productId)
 }
 
-func (ps *ProductService) Update(product *entity.Product) error {
+func (ps *ProductService) Update(productID string, productDTO *types.ProductDTO) error {
+
+	product, err := ps.productRepository.FindByID(productID)
+
+	if err != nil {
+		return err
+	}
+
+	product.Name = productDTO.Name
+	product.Price = productDTO.Price
+
 	return ps.productRepository.Update(product)
 }
 
