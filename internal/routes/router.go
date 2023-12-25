@@ -4,6 +4,7 @@ import (
 	_ "github.com/emejotaw/product-api/docs"
 	jwtware "github.com/gofiber/contrib/jwt"
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/swagger"
 	"gorm.io/gorm"
 )
@@ -18,6 +19,7 @@ func NewRouter() *router {
 func (r *router) Run(db *gorm.DB) {
 
 	app := fiber.New()
+	app.Use(cors.New())
 	app.Get("/health", func(c *fiber.Ctx) error {
 
 		c.SendString("UP")

@@ -22,6 +22,18 @@ func NewProductController(db *gorm.DB) *ProductController {
 	}
 }
 
+// Create product godoc
+// @Summary Create product
+// @Description Endpoint to create a product
+// @Tags products
+// @Accept json
+// @Produce json
+// @Param Authorization header string true "access token"
+// @Param request body types.ProductDTO true "product.request"
+// @Success 201
+// @Failure 400
+// @Failure 500
+// @Router  /api/v1/products [post]
 func (pc *ProductController) CreateProduct(ctx *fiber.Ctx) error {
 
 	productDTO := new(types.ProductDTO)
@@ -43,6 +55,21 @@ func (pc *ProductController) CreateProduct(ctx *fiber.Ctx) error {
 	return nil
 }
 
+// Find all products godoc
+// @Summary Find all products
+// @Description List all the products paginated
+// @Tags products
+// @Accept json
+// @Produce json
+// @Param Authorization header string true "access token"
+// @Param page query int true "1"
+// @Param size query int true "10"
+// @Param sort query string false "asc|desc"
+// @Success 200
+// @Failure 400
+// @Failure 404
+// @Failure 500
+// @Router /api/v1/products [get]
 func (pc *ProductController) FindAll(ctx *fiber.Ctx) error {
 
 	page, errPage := strconv.Atoi(ctx.Query("page"))
@@ -72,6 +99,19 @@ func (pc *ProductController) FindAll(ctx *fiber.Ctx) error {
 	return nil
 }
 
+// Get product godoc
+// @Summary Get product by id
+// @Description Receives an id and returns a product by given id
+// @Tags products
+// @Accept json
+// @Produce json
+// @Param Authorization header string true "access token"
+// @Param productId query string true "1"
+// @Success 200
+// @Failure 400
+// @Failure 404
+// @Failure 500
+// @Router /api/v1/products/get [get]
 func (pc *ProductController) FindByID(ctx *fiber.Ctx) error {
 
 	productId := ctx.Query("productId")
@@ -87,6 +127,18 @@ func (pc *ProductController) FindByID(ctx *fiber.Ctx) error {
 	return nil
 }
 
+// Update product godoc
+// @Summary Update product
+// @Description Endpoint to update a product
+// @Tags products
+// @Accept json
+// @Produce json
+// @Param Authorization header string true "access token"
+// @Param request body types.ProductDTO true "product.request"
+// @Success 204
+// @Failure 400
+// @Failure 500
+// @Router  /api/v1/products [put]
 func (pc *ProductController) Update(ctx *fiber.Ctx) error {
 
 	productId := ctx.Query("productId")
@@ -109,6 +161,19 @@ func (pc *ProductController) Update(ctx *fiber.Ctx) error {
 	return nil
 }
 
+// Delete product godoc
+// @Summary Delete product by id
+// @Description Receives an id and delete a product by given id
+// @Tags products
+// @Accept json
+// @Produce json
+// @Param Authorization header string true "access token"
+// @Param productId query string true "1"
+// @Success 204
+// @Failure 400
+// @Failure 404
+// @Failure 500
+// @Router /api/v1/products [delete]
 func (pc *ProductController) Delete(ctx *fiber.Ctx) error {
 
 	productID := ctx.Query("productId")
