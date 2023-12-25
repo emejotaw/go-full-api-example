@@ -186,6 +186,7 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
+                        "format": "uuid",
                         "description": "1",
                         "name": "productId",
                         "in": "query",
@@ -231,6 +232,7 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
+                        "format": "uuid",
                         "description": "1",
                         "name": "productId",
                         "in": "query",
@@ -257,18 +259,60 @@ const docTemplate = `{
             "post": {
                 "description": "Receives an email and a password and returns a JWT",
                 "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "users"
+                ],
+                "summary": "Endpoint to authenticate",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "email",
+                        "name": "email",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "password",
+                        "name": "password",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/sign-up": {
+            "post": {
+                "description": "Receives a request and creates a new user",
+                "consumes": [
                     "application/json"
                 ],
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
-                    "login"
+                    "users"
                 ],
-                "summary": "Endpoint to authenticate",
+                "summary": "Create a new user",
                 "parameters": [
                     {
-                        "description": "user.request",
+                        "description": "users.request",
                         "name": "request",
                         "in": "body",
                         "required": true,

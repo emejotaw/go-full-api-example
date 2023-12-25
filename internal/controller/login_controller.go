@@ -23,11 +23,12 @@ func NewLoginController(db *gorm.DB) *LoginController {
 // Login godoc
 // @Summary      Endpoint to authenticate
 // @Description  Receives an email and a password and returns a JWT
-// @Tags         login
-// @Accept       json
+// @Tags         users
+// @Accept       mpfd
 // @Produce      json
-// @Param		 request body types.UserDTO true "user.request"
-// @Success      201
+// @Param		 email formData string true "email"
+// @Param 		 password formData string true "password"
+// @Success      200
 // @Failure      400
 // @Failure      500
 // @Router       /login [post]

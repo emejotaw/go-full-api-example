@@ -21,6 +21,17 @@ func NewUserController(db *gorm.DB) *UserController {
 	}
 }
 
+// Create user godoc
+// @Summary Create a new user
+// @Description Receives a request and creates a new user
+// @Tags users
+// @Accept json
+// @Produce json
+// @Param request body types.UserDTO true "users.request"
+// @Success 201
+// @Failure 400
+// @Failure 500
+// @Router /sign-up [post]
 func (uc *UserController) Create(c *fiber.Ctx) error {
 
 	userDTO := new(types.UserDTO)
