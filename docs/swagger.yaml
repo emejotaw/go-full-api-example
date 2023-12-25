@@ -41,6 +41,7 @@ paths:
         required: true
         type: string
       - description: "1"
+        format: uuid
         in: query
         name: productId
         required: true
@@ -165,6 +166,7 @@ paths:
         required: true
         type: string
       - description: "1"
+        format: uuid
         in: query
         name: productId
         required: true
@@ -186,10 +188,38 @@ paths:
   /login:
     post:
       consumes:
-      - application/json
+      - multipart/form-data
       description: Receives an email and a password and returns a JWT
       parameters:
-      - description: user.request
+      - description: email
+        in: formData
+        name: email
+        required: true
+        type: string
+      - description: password
+        in: formData
+        name: password
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Server Error
+      summary: Endpoint to authenticate
+      tags:
+      - users
+  /sign-up:
+    post:
+      consumes:
+      - application/json
+      description: Receives a request and creates a new user
+      parameters:
+      - description: users.request
         in: body
         name: request
         required: true
@@ -204,7 +234,7 @@ paths:
           description: Bad Request
         "500":
           description: Internal Server Error
-      summary: Endpoint to authenticate
+      summary: Create a new user
       tags:
-      - login
+      - users
 swagger: "2.0"

@@ -106,7 +106,7 @@ func (pc *ProductController) FindAll(ctx *fiber.Ctx) error {
 // @Accept json
 // @Produce json
 // @Param Authorization header string true "access token"
-// @Param productId query string true "1"
+// @Param productId query string true "1" Format(uuid)
 // @Success 200
 // @Failure 400
 // @Failure 404
@@ -168,7 +168,7 @@ func (pc *ProductController) Update(ctx *fiber.Ctx) error {
 // @Accept json
 // @Produce json
 // @Param Authorization header string true "access token"
-// @Param productId query string true "1"
+// @Param productId query string true "1" Format(uuid)
 // @Success 204
 // @Failure 400
 // @Failure 404
